@@ -1,0 +1,261 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+}
+
+const { title, description, canonical } = Astro.props;
+const canonicalURL = canonical ?? new URL(Astro.url.pathname, Astro.site).toString();
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalURL} />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://lirp.cdn-website.com/2a45263c/dms3rep/multi/opt/wise-leaders-academy-logo-final-a4c1d616-1920w.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://lirp.cdn-website.com/2a45263c/dms3rep/multi/opt/wise-leaders-academy-fav-icon-1920w.png" />
+
+  <!-- Fonts preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <header id="site-header">
+    <div class="container nav-inner">
+      <a href="/" class="logo" aria-label="Wise Leaders Academy home">
+        <img
+          src="/brand/wila-logo.png"
+          alt="Wise Leaders Academy"
+          width="180"
+          height="60"
+        />
+      </a>
+
+      <button class="hamburger" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav id="main-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/gallery">Gallery</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <slot />
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img
+          src="/brand/wila-logo.png"
+          alt="Wise Leaders Academy icon"
+          width="180"
+          height="60"
+        />
+        <p>Empowering children through play-based learning in an environment filled with love and kindness.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/understanding-daycare-costs-in-los-angeles-2025">How Much Does Daycare Cost In Los Angeles?</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Visit Us</h4>
+        <address>
+          2414 Virginia Road<br />
+          Los Angeles CA, 90016
+        </address>
+        <p class="hours"><strong>Hours:</strong> Mon – Fri: 7:30 AM – 5:30 PM</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact & License</h4>
+        <ul>
+          <li><a href="tel:3233307271">(323) 330-7271</a></li>
+          <li><a href="tel:3109042655">(310) 904-2655</a></li>
+          <li><a href="mailto:hello@wiseleadersacademy.com">hello@wiseleadersacademy.com</a></li>
+          <li>State License #197495535</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; {new Date().getFullYear()} Wise Leaders Academy. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
+
+<style>
+/* ---- Header ---- */
+#site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--green);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255,255,255,0.18);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  height: 72px;
+}
+
+.logo img { height: 48px; width: auto; }
+
+#main-nav { margin-left: auto; }
+#main-nav ul { display: flex; align-items: center; gap: 4px; list-style: none; }
+#main-nav a {
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 15px;
+  color: #ffffff;
+  transition: background 0.15s, color 0.15s;
+}
+#main-nav a:hover { background: rgba(255,255,255,0.16); color: #ffffff; }
+#main-nav a.nav-cta {
+  background: var(--green);
+  color: var(--white);
+  padding: 8px 18px;
+  border-radius: 50px;
+}
+#main-nav a.nav-cta:hover { background: #007c92; }
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  margin-left: auto;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #ffffff;
+  border-radius: 2px;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+/* ---- Footer ---- */
+footer {
+  background: var(--brown);
+  color: rgba(253,248,240,0.92);
+  margin-top: 80px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding: 64px 24px 48px;
+}
+
+.footer-brand img {
+  margin-bottom: 16px;
+  display: block;
+  height: auto; /* Keep aspect ratio (logo is not square). */
+}
+.footer-brand p { font-size: 14px; line-height: 1.7; color: rgba(253,248,240,0.85); }
+
+.footer-col h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  color: var(--cream);
+  margin-bottom: 16px;
+}
+
+.footer-col ul { list-style: none; }
+.footer-col ul li, .footer-col address, .footer-col .hours {
+  font-size: 14px;
+  color: rgba(253,248,240,0.85);
+  margin-bottom: 8px;
+  font-style: normal;
+  line-height: 1.6;
+}
+.footer-col a:hover { color: var(--green-light); }
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding: 20px 24px;
+  text-align: center;
+  font-size: 13px;
+  color: rgba(253,248,240,0.78);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 900px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .nav-phone { display: none; }
+}
+
+@media (max-width: 700px) {
+  .hamburger { display: flex; }
+  .nav-phone { display: none; }
+
+  #main-nav {
+    display: none;
+    position: absolute;
+    top: 72px;
+    left: 0;
+    right: 0;
+    background: var(--green);
+    border-bottom: 1px solid rgba(0,151,178,0.15);
+    padding: 16px 24px;
+    margin-left: 0;
+  }
+  #main-nav.open { display: block; }
+  #main-nav ul { flex-direction: column; gap: 4px; }
+  #main-nav a { display: block; }
+
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+}
+</style>
+
+<script>
+const toggle = document.getElementById('nav-toggle');
+const nav = document.getElementById('main-nav');
+toggle?.addEventListener('click', () => {
+  const open = nav?.classList.toggle('open');
+  toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+</script>

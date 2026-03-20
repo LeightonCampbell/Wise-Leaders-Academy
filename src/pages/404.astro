@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Page Not Found | Wise Leaders Academy"
+  description="The page you were looking for could not be found. Return to Wise Leaders Academy's home page."
+>
+  <section class="notfound section">
+    <div class="container">
+      <span class="eyebrow">404</span>
+      <h1>Page Not Found</h1>
+      <p>Sorry, the page you're looking for doesn't exist. It may have moved when we updated our site.</p>
+      <a href="/" class="btn btn-primary">Back to Home</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.notfound { text-align: center; padding: 120px 0; }
+.notfound h1 { font-size: 3rem; margin: 16px 0; }
+.notfound p { font-size: 1.1rem; color: var(--text-muted); max-width: 440px; margin: 0 auto 32px; }
+</style>

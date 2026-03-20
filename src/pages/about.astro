@@ -1,0 +1,164 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="About Wise Leaders Academy | Licensed Daycare West Adams, Los Angeles"
+  description="Learn about Wise Leaders Academy — a licensed, home-based daycare in West Adams, LA for children ages 1–6. Meet Program Director Judy and discover our unique curriculum."
+>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">About Us</span>
+      <h1>Raising the Next Generation<br />of Wise Leaders</h1>
+      <p class="page-hero-sub">More than just daycare — we are a launchpad for confidence, kindness, and curiosity for children ages 1–6.</p>
+    </div>
+  </section>
+
+  <!-- MISSION -->
+  <section class="section">
+    <div class="container mission-grid">
+      <div class="mission-text">
+        <span class="eyebrow">Our Philosophy</span>
+        <h2>Wise Choices Today, Wise Leaders Tomorrow.</h2>
+        <p>Located in the heart of Los Angeles (West Adams), Wise Leaders Academy was founded on a simple belief: even the smallest children are capable of big things.</p>
+        <p>We offer a safe, nurturing home-based environment where play serves a purpose. We don't just "watch" your children; we guide them. By integrating literacy, hands-on gardening, and cognitive development into daily play, we help toddlers and preschoolers build the foundation they need for kindergarten and beyond.</p>
+      </div>
+      <div class="mission-stats">
+        <div class="stat-block">
+          <span class="stat-num">1:5</span>
+          <span class="stat-label">Teacher-to-child ratio</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-num">Ages 1–6</span>
+          <span class="stat-label">Developmental range</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-num">★ 5.0</span>
+          <span class="stat-label">Parent rating</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-num">Licensed</span>
+          <span class="stat-label">CA State #197495535</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CURRICULUM PILLARS -->
+  <section class="section" style="background:var(--green-pale);">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Our Unique Curriculum</span>
+        <h2>How We Nurture Little Leaders</h2>
+      </div>
+      <div class="curriculum-cards">
+        <div class="curric-card">
+          <div class="curric-icon">🤝</div>
+          <h3>Little Leaders Circles</h3>
+          <p>A daily time for thoughtful decision-making. We encourage children to express feelings, resolve conflicts gently, and learn the value of "wise choices."</p>
+        </div>
+        <div class="curric-card">
+          <div class="curric-icon">🌿</div>
+          <h3>Nature's Garden</h3>
+          <p>Through hands-on gardening and outdoor exploration, children dig in the dirt, watch life grow, and develop a deep respect for the environment.</p>
+        </div>
+        <div class="curric-card">
+          <div class="curric-icon">🎨</div>
+          <h3>Creativity Hour</h3>
+          <p>From joyful music and movement to painting and crafts, we help children find their voice and learn valuable teamwork skills through shared creation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RATIOS -->
+  <section class="section">
+    <div class="container ratios-inner">
+      <div class="ratios-text">
+        <span class="eyebrow">Small &amp; Personal</span>
+        <h2>Small Ratios. Big Attention.</h2>
+        <p>We know that large centers can feel overwhelming. At Wise Leaders Academy, we keep our group sizes small to ensure every child receives personalized love and attention.</p>
+        <p>In our home, your child is family. We are committed to providing a stimulating, joyful experience where your little one feels safe enough to take risks, make mistakes, and grow into a compassionate leader.</p>
+        <a href="/contact" class="btn btn-primary" style="margin-top:24px;">Come Meet the Teachers</a>
+      </div>
+      <img
+        src="https://lirp.cdn-website.com/2a45263c/dms3rep/multi/opt/IMG-20250922-WA0004-1920w.png"
+        alt="Children playing outdoors at Wise Leaders Academy's private backyard"
+        class="ratios-img"
+        loading="lazy"
+      />
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+.page-hero {
+  background: linear-gradient(135deg, #f0f7f2, var(--cream));
+  padding: 80px 0 64px;
+  text-align: center;
+}
+.page-hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); margin-bottom: 16px; }
+.page-hero-sub { font-size: 1.1rem; color: var(--text-muted); max-width: 580px; margin: 0 auto; }
+
+.mission-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.mission-text h2 { font-size: 1.9rem; margin: 12px 0 20px; }
+.mission-text p { color: var(--text-muted); margin-bottom: 14px; }
+
+.mission-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.stat-block {
+  background: var(--green-pale);
+  border-radius: var(--radius);
+  padding: 24px 20px;
+  text-align: center;
+}
+.stat-num { display: block; font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--green); font-weight: 700; }
+.stat-label { display: block; font-size: 13px; color: var(--text-muted); font-weight: 500; margin-top: 4px; }
+
+.section-header { text-align: center; max-width: 600px; margin: 0 auto 48px; }
+.section-header h2 { font-size: 2rem; margin: 12px 0; }
+
+.curriculum-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.curric-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s;
+}
+.curric-card:hover { transform: translateY(-4px); }
+.curric-icon { font-size: 36px; margin-bottom: 16px; }
+.curric-card h3 { font-size: 1.15rem; margin-bottom: 10px; }
+.curric-card p { font-size: 14px; color: var(--text-muted); }
+
+.ratios-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.ratios-text h2 { font-size: 2rem; margin: 12px 0 20px; }
+.ratios-text p { color: var(--text-muted); margin-bottom: 14px; }
+.ratios-img { border-radius: var(--radius); box-shadow: var(--shadow-lg); width: 100%; object-fit: cover; height: 380px; }
+
+@media (max-width: 900px) {
+  .mission-grid, .ratios-inner { grid-template-columns: 1fr; gap: 40px; }
+  .mission-stats { grid-template-columns: 1fr 1fr; }
+  .curriculum-cards { grid-template-columns: 1fr; }
+  .ratios-img { height: 240px; }
+}
+</style>

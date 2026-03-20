@@ -1,0 +1,95 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Add your gallery image URLs here.
+// Images from the current site could not be automatically extracted (the gallery CMS grid was empty in static scrape).
+// Recommended: upload photos to /public/gallery/ and reference them as src="/gallery/photo-1.jpg" etc.
+const images: { src: string; alt: string }[] = [
+  { src: "/gallery/photo-01.jpg", alt: "Children painting at Wise Leaders Academy" },
+  { src: "/gallery/photo-02.jpg", alt: "Outdoor playtime at Wise Leaders Academy" },
+  { src: "/gallery/photo-03.jpg", alt: "Circle time learning with teachers and classmates" },
+  { src: "/gallery/photo-04.jpg", alt: "Hands-on activity building early motor skills" },
+  { src: "/gallery/photo-05.jpg", alt: "Story time in a cozy classroom reading corner" },
+  { src: "/gallery/photo-06.jpg", alt: "Friends sharing a joyful moment during the day" },
+];
+---
+<BaseLayout
+  title="Daycare Gallery | Wise Leaders Academy | LA, 90016"
+  description="See photos of daily life at Wise Leaders Academy — our classrooms, outdoor spaces, arts & crafts, and happy children in West Adams, Los Angeles."
+>
+
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Gallery</span>
+      <h1>A Peek Inside Our World</h1>
+      <p class="page-hero-sub">Glimpses of the joy, learning, and love that fill every day at Wise Leaders Academy.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      {images.length > 0 ? (
+        <div class="gallery-grid">
+          {images.map((img) => (
+            <div class="gallery-item">
+              <img src={img.src} alt={img.alt} loading="lazy" />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div class="gallery-placeholder">
+          <p>📸 Gallery photos coming soon!</p>
+          <p class="hint">Add your images to <code>/public/gallery/</code> and update the <code>images</code> array in <code>src/pages/gallery.astro</code>.</p>
+        </div>
+      )}
+
+      <div style="text-align:center;margin-top:48px;">
+        <a href="/contact" class="btn btn-primary">Schedule a Visit to See It in Person</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+.page-hero {
+  background: linear-gradient(135deg, #f0f7f2, var(--cream));
+  padding: 80px 0 64px;
+  text-align: center;
+}
+.page-hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); margin-bottom: 16px; }
+.page-hero-sub { font-size: 1.1rem; color: var(--text-muted); max-width: 580px; margin: 0 auto; }
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.gallery-item {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  background: var(--green-pale);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.gallery-item:hover { transform: scale(1.02); box-shadow: var(--shadow-lg); }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+
+.gallery-placeholder {
+  text-align: center;
+  background: var(--green-pale);
+  border: 2px dashed var(--green-light);
+  border-radius: var(--radius);
+  padding: 64px 32px;
+  color: var(--text-muted);
+}
+.gallery-placeholder p { font-size: 1.1rem; margin-bottom: 12px; }
+.gallery-placeholder .hint { font-size: 14px; }
+.gallery-placeholder code {
+  background: rgba(0,151,178,0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+}
+</style>
