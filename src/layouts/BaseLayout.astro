@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import MultiStepTourModal from '../components/MultiStepTourModal.astro';
 
 interface Props {
   title: string;
@@ -66,6 +67,8 @@ const canonicalURL = canonical ?? new URL(Astro.url.pathname, Astro.site).toStri
     <slot />
   </main>
 
+  <MultiStepTourModal />
+
   <!-- ===== FOOTER ===== -->
   <footer>
     <div class="container footer-grid">
@@ -100,7 +103,6 @@ const canonicalURL = canonical ?? new URL(Astro.url.pathname, Astro.site).toStri
         <h4>Contact & License</h4>
         <ul>
           <li><a href="tel:3233307271">(323) 330-7271</a></li>
-          <li><a href="tel:3109042655">(310) 904-2655</a></li>
           <li><a href="mailto:hello@wiseleadersacademy.com">hello@wiseleadersacademy.com</a></li>
           <li>State License #197495535</li>
         </ul>

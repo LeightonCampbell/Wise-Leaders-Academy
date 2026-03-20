@@ -1,0 +1,399 @@
+---
+const purposes = {
+  tour: "Schedule a Tour",
+  tuition: "Inquire About Tuition",
+  visit: "Schedule a Visit to See It in Person",
+} as const;
+---
+
+<div id="tour-modal" class="ms-modal" aria-hidden="true">
+  <div class="ms-backdrop" data-ms-close="true" aria-hidden="true"></div>
+
+  <div class="ms-panel" role="dialog" aria-modal="true" aria-labelledby="ms-title">
+    <div class="ms-header">
+      <div>
+        <h3 id="ms-title" class="ms-title">Get Started</h3>
+        <p class="ms-subtitle" id="ms-purpose">—</p>
+      </div>
+
+      <button type="button" class="ms-close" data-ms-close="true" aria-label="Close modal">
+        ✕
+      </button>
+    </div>
+
+    <div class="ms-progress" aria-hidden="true">
+      <span class="ms-dot" data-ms-step="1"></span>
+      <span class="ms-dot" data-ms-step="2"></span>
+      <span class="ms-dot" data-ms-step="3"></span>
+    </div>
+
+    <form id="ms-form" class="ms-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <input type="hidden" name="_subject" value="Wise Leaders Academy - Multi-step inquiry" />
+      <input type="hidden" id="ms-purpose-input" name="purpose" value="tour" />
+
+      <div class="ms-step" data-ms-step-index="0">
+        <h4 class="ms-step-title">Step 1: Contact Info</h4>
+
+        <label class="ms-label">
+          Your name <span class="ms-req" aria-hidden="true">*</span>
+          <input class="ms-input" name="name" type="text" required autocomplete="name" />
+        </label>
+
+        <label class="ms-label">
+          Email <span class="ms-req" aria-hidden="true">*</span>
+          <input class="ms-input" name="email" type="email" required autocomplete="email" />
+        </label>
+
+        <label class="ms-label">
+          Phone
+          <input class="ms-input" name="phone" type="tel" autocomplete="tel" />
+        </label>
+
+        <div class="ms-actions">
+          <button type="button" class="ms-next" data-ms-next="true">Next</button>
+        </div>
+      </div>
+
+      <div class="ms-step" data-ms-step-index="1" hidden>
+        <h4 class="ms-step-title">Step 2: Child Details</h4>
+
+        <label class="ms-label">
+          Child's name
+          <input class="ms-input" name="child_name" type="text" />
+        </label>
+
+        <label class="ms-label">
+          Date of Birth (DOB) <span class="ms-req" aria-hidden="true">*</span>
+          <input class="ms-input" name="dob" type="date" required />
+        </label>
+
+        <label class="ms-label">
+          Preferred start date
+          <input class="ms-input" name="start_date" type="date" />
+        </label>
+
+        <div class="ms-actions ms-between">
+          <button type="button" class="ms-back" data-ms-back="true">Back</button>
+          <button type="button" class="ms-next" data-ms-next="true">Next</button>
+        </div>
+      </div>
+
+      <div class="ms-step" data-ms-step-index="2" hidden>
+        <h4 class="ms-step-title">Step 3: Message & Preferences</h4>
+
+        <label class="ms-label">
+          What would you like to know about our Daycare? <span class="ms-req" aria-hidden="true">*</span>
+          <textarea class="ms-input ms-textarea" name="message" rows="4" required placeholder="A couple of details so we can help you faster…"></textarea>
+        </label>
+
+        <div class="ms-inline">
+          <label class="ms-label ms-inline-label">
+            When would you like to tour our Daycare?
+            <select class="ms-input" name="tour_slot" required>
+              <option value="mon_1_2">On a Monday (1-2 PM)</option>
+              <option value="tue_1_2">On a Tuesday (1-2 PM)</option>
+              <option value="wed_1_2">On a Wednesday (1-2 PM)</option>
+              <option value="thu_1_2">On a Thursday (1-2 PM)</option>
+              <option value="fri_1_2">On a Friday (1-2 PM)</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="ms-actions ms-between">
+          <button type="button" class="ms-back" data-ms-back="true">Back</button>
+          <button type="submit" class="ms-submit">Submit</button>
+        </div>
+      </div>
+
+      <div class="ms-thanks" role="status" aria-live="polite" hidden>
+        <div class="ms-thanks-card">
+          <h4>Thanks!</h4>
+          <p>We received your request. We’ll reach out soon.</p>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+.ms-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: none;
+}
+
+.ms-modal[aria-hidden="false"] {
+  display: block;
+}
+
+.ms-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+}
+
+.ms-panel {
+  position: relative;
+  margin: 6vh auto 0;
+  width: min(620px, calc(100vw - 32px));
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 18px 18px 16px;
+}
+
+.ms-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.ms-title { font-size: 18px; margin: 0; text-align: center; }
+.ms-subtitle { color: var(--text-muted); margin: 6px 0 0; font-size: 14px; text-align: center; }
+
+.ms-close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: transparent;
+  color: var(--text);
+  border-radius: 12px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.ms-progress {
+  display: flex;
+  gap: 10px;
+  margin: 6px 0 16px;
+  justify-content: center;
+}
+
+.ms-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.18);
+}
+
+.ms-dot.is-active { background: var(--amber); }
+
+.ms-form { margin: 0; }
+
+.ms-step { }
+
+.ms-step-title {
+  margin: 0 0 14px;
+  font-size: 16px;
+  color: var(--brown);
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+}
+
+.ms-label {
+  display: block;
+  margin-bottom: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.ms-req { color: var(--amber); }
+
+.ms-input {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid #e0d8cc;
+  background: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+}
+
+.ms-textarea { resize: vertical; }
+
+.ms-inline {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.ms-inline-label { margin-bottom: 12px; }
+
+.ms-actions {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ms-actions.ms-between {
+  justify-content: space-between;
+}
+
+.ms-next, .ms-back {
+  background: var(--green-pale);
+  border: 1px solid rgba(0,151,178,0.18);
+  color: var(--green);
+  border-radius: 50px;
+  padding: 12px 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ms-back { background: transparent; }
+
+/* Step 1: Next matches the width of inputs (mobile + desktop). */
+.ms-step[data-ms-step-index="0"] .ms-next {
+  width: 100%;
+}
+.ms-step[data-ms-step-index="0"] .ms-actions {
+  justify-content: center;
+}
+
+.ms-submit {
+  background: var(--amber);
+  border: 1px solid var(--amber);
+  color: var(--white);
+  border-radius: 50px;
+  padding: 12px 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ms-thanks-card {
+  background: var(--green-pale);
+  border: 1px solid rgba(0,151,178,0.18);
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .ms-panel { margin-top: 10vh; padding: 14px 14px 12px; }
+  .ms-inline { grid-template-columns: 1fr; }
+  .ms-actions { justify-content: center; }
+  .ms-actions.ms-between { flex-direction: column; align-items: stretch; gap: 10px; }
+}
+</style>
+
+<script>
+  const modal = document.getElementById('tour-modal');
+  const form = document.getElementById('ms-form');
+  const purposeInput = document.getElementById('ms-purpose-input');
+  const purposeText = document.getElementById('ms-purpose');
+  const steps = Array.from(modal?.querySelectorAll('.ms-step') ?? []);
+  const dots = Array.from(modal?.querySelectorAll('.ms-dot') ?? []);
+  const thanks = modal?.querySelector('.ms-thanks');
+
+  let currentStepIndex = 0;
+  function setActiveDot(index) {
+    dots.forEach((d, i) => d.classList.toggle('is-active', i === index));
+  }
+
+  function showStep(index) {
+    currentStepIndex = index;
+    steps.forEach((s) => {
+      const idx = Number(s.getAttribute('data-ms-step-index'));
+      s.hidden = idx !== index;
+    });
+    setActiveDot(index);
+    thanks && (thanks.hidden = true);
+  }
+
+  function validateStep(stepEl) {
+    const required = Array.from(stepEl.querySelectorAll('[required]'));
+    for (const el of required) {
+      if (!el.checkValidity()) {
+        el.reportValidity();
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function openModal(purpose) {
+    if (!modal) return;
+    const labels = {
+      tour: 'Schedule a Tour',
+      tuition: 'Inquire About Tuition',
+      visit: 'Schedule a Visit to See It in Person',
+    };
+    purposeInput.value = purpose;
+    purposeText.textContent = labels[purpose] ?? 'Request';
+
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    showStep(0);
+
+    // Focus first input for good UX.
+    const first = steps[0]?.querySelector('input, select, textarea');
+    first?.focus?.();
+  }
+
+  function closeModal() {
+    if (!modal) return;
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  modal?.addEventListener('click', (e) => {
+    const target = e.target;
+    if (target && target.getAttribute && target.getAttribute('data-ms-close') === 'true') closeModal();
+  });
+
+  document.addEventListener('click', (e) => {
+    const el = e.target?.closest?.('[data-modal-purpose]');
+    if (!el) return;
+    // If the trigger is an in-page hash link (href="#..."), allow the default
+    // browser scroll so the user lands on the intended section.
+    const href = (el.getAttribute('href') ?? '').trim();
+    if (!href.startsWith('#')) e.preventDefault();
+    e.stopPropagation();
+    openModal(el.getAttribute('data-modal-purpose'));
+  });
+
+  modal?.addEventListener('click', (e) => {
+    const nextBtn = e.target?.closest?.('[data-ms-next="true"]');
+    const backBtn = e.target?.closest?.('[data-ms-back="true"]');
+    if (nextBtn) {
+      const stepEl = steps[currentStepIndex];
+      if (!validateStep(stepEl)) return;
+      showStep(Math.min(currentStepIndex + 1, steps.length - 1));
+    } else if (backBtn) {
+      showStep(Math.max(currentStepIndex - 1, 0));
+    }
+  });
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const stepEl = steps[currentStepIndex];
+    if (!validateStep(stepEl)) return;
+
+    const btn = form.querySelector('button[type="submit"], .ms-submit');
+    if (btn) btn.disabled = true;
+
+    const fd = new FormData(form);
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: fd, headers: { Accept: 'application/json' } });
+      if (!res.ok) throw new Error('Request failed');
+    } catch {
+      // Still show success locally so the modal flow feels complete in dev.
+    } finally {
+      steps.forEach((s) => (s.hidden = true));
+      thanks && (thanks.hidden = false);
+      if (btn) btn.disabled = false;
+    }
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+</script>
+

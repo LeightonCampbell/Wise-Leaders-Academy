@@ -4,8 +4,8 @@
   --green: #0097b2;
   --green-light: #31b7cf;
   --green-pale: #d7f4f9;
-  --amber: #e9a11b;
-  --amber-light: #fef3c7;
+  --amber: #ff8d4e;
+  --amber-light: #ffe2d2;
   --cream: #fdf8f0;
   --brown: #ff8d4e;
   --text: #1a1a1a;
@@ -92,7 +92,7 @@ img { max-width: 100%; display: block; }
 .btn-amber:hover {
   background: #c87f0f;
   transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(233,161,27,0.35);
+  box-shadow: 0 4px 20px rgba(255,141,78,0.35);
 }
 
 /* Section spacing */
@@ -129,3 +129,13 @@ img { max-width: 100%; display: block; }
 .fade-up.delay-1 { animation-delay: 0.1s; }
 .fade-up.delay-2 { animation-delay: 0.2s; }
 .fade-up.delay-3 { animation-delay: 0.3s; }
+
+/* Mobile-first centering */
+@media (max-width: 700px) {
+  .container { text-align: center; }
+  img { margin-left: auto; margin-right: auto; }
+  #main-nav ul { justify-content: center; }
+
+  /* Keep typed text readable (avoid inheriting center alignment). */
+  .form-group input, .form-group textarea { text-align: left; }
+}
