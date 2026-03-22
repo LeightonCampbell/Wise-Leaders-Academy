@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const web3AccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
 ---
 <BaseLayout
   title="Daycare in West Adams & Mid-City | Wise Leaders Academy"
@@ -10,8 +12,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <section class="hero">
     <div class="container hero-inner">
       <div class="hero-badge">
-        <span class="stars">★★★★★</span>
-        <span>Rated 5 Stars by Parents &nbsp;·&nbsp; State License #197495535</span>
+        <span class="hero-stars" aria-hidden="true">⭐⭐⭐⭐⭐</span>
+        <div class="hero-badge-copy">
+          <span class="hero-badge-line">Rated 5 Stars by Parents</span>
+          <span class="hero-badge-sep" aria-hidden="true"> · </span>
+          <span class="hero-badge-line">State License #197495535</span>
+        </div>
       </div>
       <h1 class="fade-up">
         <span class="hero-title-line1">The Best Start for Your Child</span>
@@ -197,23 +203,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <section class="testimonials section" style="background: var(--brown);">
     <div class="container">
       <div class="section-header" style="color:var(--cream);">
-        <span class="eyebrow" style="background:rgba(255,255,255,0.15);color:var(--green-pale);">Families Love Us</span>
-        <h2 style="color:var(--green);">Loved by Local Families</h2>
-        <p class="section-intro" style="color:var(--cream);">Don't just take our word for it. Here is what parents in West Adams are saying.</p>
+        <span class="eyebrow testimonials-eyebrow">Families Love Us</span>
+        <h2 class="testimonials-title">Loved by Local Families</h2>
+        <p class="section-intro testimonials-intro">Don't just take our word for it. Here is what parents in West Adams are saying.</p>
       </div>
       <div class="reviews-grid">
         <div class="review-card">
-          <div class="stars">★★★★★</div>
+          <div class="review-stars" aria-hidden="true">⭐⭐⭐⭐⭐</div>
           <p>"This daycare is awesome, and the kids are really learning. Anyone who needs a daycare should send their kids to Wise Leaders Academy; they really value education."</p>
           <cite>— Nima Sheel</cite>
         </div>
         <div class="review-card">
-          <div class="stars">★★★★★</div>
+          <div class="review-stars" aria-hidden="true">⭐⭐⭐⭐⭐</div>
           <p>"As first-time parents, we were nervous about daycares. The team here made the transition seamless, and my baby loves coming to school. The daily updates and communication give us such peace of mind."</p>
           <cite>— Alex & Gen C.</cite>
         </div>
         <div class="review-card">
-          <div class="stars">★★★★★</div>
+          <div class="review-stars" aria-hidden="true">⭐⭐⭐⭐⭐</div>
           <p>"Finding a daycare you can trust can be a stressful experience, but from the moment we met Judy and Leighton, we felt safe. They aren't just incredible caretakers — they're family."</p>
           <cite>— <a href="https://www.calvarychapelcrenshaw.com" target="_blank" rel="noopener">Calvary Chapel Crenshaw</a></cite>
         </div>
@@ -225,18 +231,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <section class="cta-section section" id="still-looking">
     <div class="container cta-inner">
       <div class="cta-text">
-        <span class="eyebrow">Still looking?</span>
         <h2>Still looking for the perfect care?</h2>
         <p>Download our current <strong>Tuition Rates</strong> + our free guide: <em>"10 Questions Every Parent Should Ask Before Choosing a Daycare."</em></p>
       </div>
       <div class="cta-form-wrap">
         <form
           id="tuition-form"
-          action="https://formspree.io/f/YOUR_FORM_ID"
+          action="https://api.web3forms.com/submit"
           method="POST"
           novalidate
         >
-          <!-- NOTE: Replace YOUR_FORM_ID with your Formspree (or chosen) form ID -->
+          <input type="hidden" name="access_key" value={web3AccessKey} />
           <div class="form-group">
             <label for="tf-name">Name</label>
             <input type="text" id="tf-name" name="name" placeholder="Your name" required />
@@ -249,7 +254,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <label for="tf-phone">Phone</label>
             <input type="tel" id="tf-phone" name="phone" placeholder="(xxx) xxx-xxxx" />
           </div>
-          <input type="hidden" name="_subject" value="Tuition Rates Request – Wise Leaders Academy" />
+          <input type="hidden" name="subject" value="Tuition Rates Request – Wise Leaders Academy" />
           <button type="submit" class="btn btn-amber" style="width:100%;justify-content:center;">
             Send Me the Guide
           </button>
@@ -300,7 +305,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   /* Center handled by h1 flex container */
   margin: 0;
   line-height: 1.0;
-  color: #ff8d4e !important;
+  color: #0097b2 !important;
 }
 
 @media (max-width: 700px) {
@@ -313,6 +318,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   max-width: 700px;
   margin: 0 auto;
   text-align: center;
+}
+
+.hero-stars {
+  font-size: 15px;
+  letter-spacing: 1px;
+  line-height: 1;
 }
 
 .hero-badge {
@@ -328,6 +339,53 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   color: var(--text-muted);
   margin: 0 auto 28px;
   box-shadow: var(--shadow);
+}
+
+/* Desktop: stars left, copy inline with middle dot */
+.hero-badge-copy {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  line-height: 1.35;
+}
+
+.hero-badge-line,
+.hero-badge-sep {
+  display: inline;
+}
+
+@media (max-width: 700px) {
+  .hero-badge {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 12px 20px 14px;
+    max-width: 100%;
+  }
+
+  .hero-stars {
+    margin-bottom: 4px;
+  }
+
+  .hero-badge-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-align: center;
+    max-width: 18rem;
+  }
+
+  .hero-badge-sep {
+    display: none;
+  }
+
+  .hero-badge-line {
+    display: block;
+  }
 }
 
 h1 {
@@ -354,7 +412,29 @@ h1 em {
   margin: 0 auto 36px;
 }
 
-.hero-btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+/* Equal-width CTAs: same width side-by-side on larger screens, full-width stack on small */
+.hero-btns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+  max-width: min(100%, 560px);
+  margin-left: auto;
+  margin-right: auto;
+  align-items: stretch;
+}
+.hero-btns .btn {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+@media (max-width: 520px) {
+  .hero-btns {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+}
 
 /* Hero-specific CTA override */
 .btn-inquire {
@@ -389,7 +469,11 @@ h1 em {
 .pillar:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
 .pillar-icon { font-size: 32px; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; }
 .pillar-icon svg { display: block; }
-.pillar h3 { font-size: 1.1rem; margin-bottom: 8px; }
+.pillar h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: #2a2828e6;
+}
 .pillar p { font-size: 14px; color: var(--text-muted); }
 
 /* ---- Welcome ---- */
@@ -521,17 +605,48 @@ h1 em {
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
+.testimonials-eyebrow {
+  background: #ffffff !important;
+  color: #ff8d4e !important;
+}
+.testimonials-intro {
+  color: #ffffff !important;
+}
+
+.testimonials-title {
+  color: #2a2828e6;
+}
+
 .review-card {
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: #ffffff;
+  border: 1px solid rgba(255,141,78,0.25);
   border-radius: var(--radius);
   padding: 32px 28px;
 }
-.review-card .stars { margin-bottom: 16px; }
-.review-card p { font-size: 15px; color: rgba(253,248,240,0.9); line-height: 1.7; margin-bottom: 16px; }
-.review-card cite { font-size: 13px; font-style: normal; font-weight: 600; color: #ffffff; }
-.testimonials .stars { color: #ffffff; }
-.review-card cite a { color: #ffffff; }
+.review-card .review-stars {
+  margin-bottom: 16px;
+  font-size: 15px;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+.review-card p {
+  font-size: 15px;
+  color: #727272;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+.review-card cite {
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  color: #2a2828e6;
+}
+.review-card cite a {
+  color: #2a2828e6;
+}
+.review-card cite a:hover {
+  color: var(--green);
+}
 
 /* ---- CTA / Form ---- */
 .cta-section { background: var(--green-pale); }
@@ -593,10 +708,13 @@ const error = document.getElementById('tuition-error');
 
 form?.addEventListener('submit', async (e) => {
   e.preventDefault();
+  if (error) error.style.display = 'none';
+  if (success) success.style.display = 'none';
   const data = new FormData(form);
   try {
     const res = await fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
-    if (res.ok) {
+    const json = (await res.json()) as { success?: boolean };
+    if (json.success) {
       form.reset();
       if (success) success.style.display = 'block';
     } else {

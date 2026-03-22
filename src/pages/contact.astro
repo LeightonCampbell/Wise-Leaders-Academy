@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const web3AccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
 ---
 <BaseLayout
   title="Schedule a Tour | Wise Leaders Academy | Contact Us"
@@ -20,34 +22,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <!-- FORM -->
       <div class="contact-form-wrap">
         <h2>Send Us a Message</h2>
-        <!--
-          FORM SETUP INSTRUCTIONS
-          ────────────────────────
-          Choose a free form service (pick one):
-
-          Option A — Formspree (recommended, free tier: 50 submissions/month)
-            1. Sign up at https://formspree.io
-            2. Create a new form → copy the endpoint URL
-            3. Replace action="https://formspree.io/f/YOUR_FORM_ID" below
-
-          Option B — Web3Forms (free, unlimited)
-            1. Sign up at https://web3forms.com
-            2. Get your access key
-            3. Change action to "https://api.web3forms.com/submit"
-            4. Add: <input type="hidden" name="access_key" value="YOUR_KEY" />
-
-          Option C — Netlify Forms (if deploying on Netlify)
-            1. Add netlify attribute: <form name="contact" method="POST" data-netlify="true">
-            2. Add: <input type="hidden" name="form-name" value="contact" />
-            3. No action URL needed — Netlify handles it automatically
-        -->
+        <!-- Forms use Web3Forms. Set PUBLIC_WEB3FORMS_ACCESS_KEY in `.env` (see `.env.example`). -->
         <form
           id="contact-form"
-          action="https://formspree.io/f/YOUR_FORM_ID"
+          action="https://api.web3forms.com/submit"
           method="POST"
           novalidate
         >
-          <input type="hidden" name="_subject" value="Contact Form – Wise Leaders Academy" />
+          <input type="hidden" name="access_key" value={web3AccessKey} />
+          <input type="hidden" name="subject" value="Contact Form – Wise Leaders Academy" />
 
           <div class="form-row">
             <div class="form-group">
@@ -212,7 +195,8 @@ form?.addEventListener('submit', async (e) => {
   const data = new FormData(form);
   try {
     const res = await fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
-    if (res.ok) {
+    const json = (await res.json()) as { success?: boolean };
+    if (json.success) {
       form.reset();
       if (success) success.style.display = 'block';
       if (error) error.style.display = 'none';

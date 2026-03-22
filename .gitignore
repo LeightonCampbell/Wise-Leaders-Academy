@@ -3,3 +3,8 @@ node_modules/
 dist/
 build/
 
+# Secrets (Web3Forms access key, etc.)
+.env
+.env.local
+.env.*.local
+

@@ -57,39 +57,20 @@ Output goes to `dist/`. Upload the contents of `dist/` to any static host.
 
 ---
 
-## 📧 Setting Up the Contact Form (required before launch)
+## 📧 Forms (Web3Forms)
 
-The site uses a simple form-to-email service. Choose one of the free options below and follow the instructions in `src/pages/contact.astro` and `src/pages/index.astro`.
+All public forms POST to [Web3Forms](https://web3forms.com) (`https://api.web3forms.com/submit`).
 
-### Option A — Formspree (recommended)
-- Free tier: 50 submissions/month
-- Sign up at https://formspree.io
-- Create a new form → copy the endpoint (e.g. `https://formspree.io/f/abcd1234`)
-- In **both** `contact.astro` and `index.astro`, replace:
-  ```
-  action="https://formspree.io/f/YOUR_FORM_ID"
-  ```
-  with your actual endpoint.
+1. Copy `.env.example` to `.env`
+2. Set your key from the Web3Forms dashboard:
+   ```
+   PUBLIC_WEB3FORMS_ACCESS_KEY=your_access_key_here
+   ```
+3. Run `npm run dev` or `npm run build` — Astro injects `PUBLIC_*` variables at **build time**.
 
-### Option B — Web3Forms (unlimited free)
-- Sign up at https://web3forms.com
-- Get your access key
-- Change the form `action` to `https://api.web3forms.com/submit`
-- Add this hidden field inside each `<form>`:
-  ```html
-  <input type="hidden" name="access_key" value="YOUR_KEY" />
-  ```
+**Production:** Add the same variable in your host’s environment (Netlify / Vercel / Cloudflare **Environment variables**), then trigger a new deploy. Without it, the built HTML will have an empty `access_key` and submissions will fail.
 
-### Option C — Netlify Forms (if deploying on Netlify — zero config)
-- Change each form opening tag to:
-  ```html
-  <form name="contact" method="POST" data-netlify="true">
-  ```
-- Add inside the form:
-  ```html
-  <input type="hidden" name="form-name" value="contact" />
-  ```
-- Remove the `action` attribute entirely.
+Covers: **Contact** (`contact.astro`), **tuition CTA** (`index.astro`), and the **multi-step tour modal** (`MultiStepTourModal.astro`). Email subjects use the hidden `subject` field per form.
 
 ---
 
@@ -165,7 +146,7 @@ All pages include: `<title>`, `<meta name="description">`, `<link rel="canonical
 - **Colors**: Edit CSS variables in `src/styles/global.css` (`:root` block)
 - **Fonts**: Currently using Playfair Display (headings) + DM Sans (body) from Google Fonts
 - **Logo / images**: Pulled directly from the CDN of the original site. Download and place in `public/` for full independence from the old host
-- **Phone numbers**: `(323) 330-7271` and `(310) 904-2655` — update in `BaseLayout.astro` footer if they change
+- **Phone**: `(323) 330-7271` — update in `BaseLayout.astro` and `contact.astro` if it changes
 - **License number**: `#197495535` — appears in footer and hero badge
 
 ---

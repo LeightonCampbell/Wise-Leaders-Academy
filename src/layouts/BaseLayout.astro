@@ -181,7 +181,7 @@ const canonicalURL = canonical ?? new URL(Astro.url.pathname, Astro.site).toStri
 /* ---- Footer ---- */
 footer {
   background: var(--brown);
-  color: rgba(253,248,240,0.92);
+  color: #ffffff;
   margin-top: 80px;
 }
 
@@ -197,23 +197,24 @@ footer {
   display: block;
   height: auto; /* Keep aspect ratio (logo is not square). */
 }
-.footer-brand p { font-size: 14px; line-height: 1.7; color: rgba(253,248,240,0.85); }
+.footer-brand p { font-size: 14px; line-height: 1.7; color: #ffffff; }
 
 .footer-col h4 {
   font-family: 'Playfair Display', serif;
   font-size: 16px;
-  color: var(--cream);
+  color: #2a2828e6;
   margin-bottom: 16px;
 }
 
 .footer-col ul { list-style: none; }
 .footer-col ul li, .footer-col address, .footer-col .hours {
   font-size: 14px;
-  color: rgba(253,248,240,0.85);
+  color: #ffffff;
   margin-bottom: 8px;
   font-style: normal;
   line-height: 1.6;
 }
+.footer-col a { color: #ffffff; }
 .footer-col a:hover { color: var(--green-light); }
 
 .footer-bottom {
@@ -221,7 +222,7 @@ footer {
   padding: 20px 24px;
   text-align: center;
   font-size: 13px;
-  color: rgba(253,248,240,0.78);
+  color: #ffffff;
 }
 
 /* ---- Responsive ---- */
