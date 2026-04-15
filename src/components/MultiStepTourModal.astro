@@ -5,7 +5,11 @@ const purposes = {
   visit: "Schedule a Visit to See It in Person",
 } as const;
 
-const web3AccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
+const web3AccessKey = (
+  import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ||
+  import.meta.env.WEB3FORMS_ACCESS_KEY ||
+  ''
+).trim();
 ---
 
 <div id="tour-modal" class="ms-modal" aria-hidden="true">
@@ -14,8 +18,10 @@ const web3AccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
   <div class="ms-panel" role="dialog" aria-modal="true" aria-labelledby="ms-title">
     <div class="ms-header">
       <div>
-        <h3 id="ms-title" class="ms-title">Get Started</h3>
-        <p class="ms-subtitle" id="ms-purpose">—</p>
+        <h3 id="ms-title" class="ms-title">Schedule a Tour</h3>
+        <p class="ms-subtitle" id="ms-subtitle">
+          Use the quick steps below to request a tour of our daycare.
+        </p>
       </div>
 
       <button type="button" class="ms-close" data-ms-close="true" aria-label="Close modal">
@@ -131,6 +137,7 @@ const web3AccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
 </div>
 
 <style>
+/* Matches site: teal accents, warm title, Playfair steps, surface-style panel */
 .ms-modal {
   position: fixed;
   inset: 0;
@@ -145,7 +152,8 @@ const web3AccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
 .ms-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.55);
+  background: rgba(13, 58, 68, 0.45);
+  backdrop-filter: blur(4px);
 }
 
 .ms-panel {
@@ -153,9 +161,24 @@ const web3AccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
   margin: 6vh auto 0;
   width: min(620px, calc(100vw - 32px));
   background: var(--white);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-lg);
-  padding: 18px 18px 16px;
+  border: 1px solid rgba(0, 151, 178, 0.14);
+  border-radius: 22px 26px 24px 22px;
+  box-shadow:
+    0 20px 60px rgba(0, 151, 178, 0.18),
+    0 0 0 1px rgba(255, 255, 255, 0.85) inset;
+  padding: 22px 22px 20px;
+  overflow: hidden;
+}
+
+.ms-panel::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--green) 0%, var(--accent-warm, #f07830) 100%);
+  pointer-events: none;
 }
 
 .ms-header {
@@ -163,62 +186,100 @@ const web3AccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
   align-items: flex-start;
   justify-content: center;
   gap: 16px;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
+  padding-top: 4px;
   position: relative;
 }
 
-.ms-title { font-size: 18px; margin: 0; text-align: center; }
-.ms-subtitle { color: var(--text-muted); margin: 6px 0 0; font-size: 14px; text-align: center; }
+.ms-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 800;
+  font-size: clamp(1.25rem, 3.5vw, 1.45rem);
+  letter-spacing: -0.02em;
+  color: var(--accent-warm, #f07830);
+  margin: 0;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.ms-subtitle {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin: 8px 0 0;
+  text-align: center;
+}
 
 .ms-close {
   position: absolute;
   right: 0;
   top: 0;
-  border: 1px solid rgba(0,0,0,0.08);
-  background: transparent;
-  color: var(--text);
+  border: 1px solid rgba(0, 151, 178, 0.2);
+  background: var(--white);
+  color: #3d4f5c;
   border-radius: 12px;
-  padding: 6px 10px;
+  padding: 8px 12px;
   cursor: pointer;
+  font-size: 15px;
+  line-height: 1;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.ms-close:hover {
+  background: var(--green-pale);
+  border-color: rgba(0, 151, 178, 0.35);
+  color: var(--green);
 }
 
 .ms-progress {
   display: flex;
-  gap: 10px;
-  margin: 6px 0 16px;
+  gap: 8px;
+  margin: 14px 0 18px;
   justify-content: center;
 }
 
 .ms-dot {
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
   border-radius: 999px;
-  background: rgba(0,0,0,0.18);
+  background: rgba(0, 151, 178, 0.2);
+  border: 1px solid rgba(0, 151, 178, 0.12);
 }
 
-.ms-dot.is-active { background: var(--amber); }
+.ms-dot.is-active {
+  background: var(--accent-warm, #f07830);
+  border-color: rgba(240, 120, 48, 0.35);
+}
 
-.ms-form { margin: 0; }
-
-.ms-step { }
+.ms-form {
+  margin: 0;
+}
 
 .ms-step-title {
-  margin: 0 0 14px;
-  font-size: 16px;
-  color: var(--brown);
+  margin: 0 0 16px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--green);
   font-family: 'Playfair Display', serif;
   text-align: center;
+  line-height: 1.25;
 }
 
 .ms-label {
   display: block;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   font-weight: 600;
   font-size: 14px;
   color: var(--text);
+  font-family: 'DM Sans', sans-serif;
 }
 
-.ms-req { color: var(--amber); }
+.ms-req {
+  color: var(--accent-warm, #f07830);
+}
 
 .ms-input {
   display: block;
@@ -226,13 +287,24 @@ const web3AccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
   margin-top: 8px;
   padding: 12px 14px;
   border-radius: var(--radius-sm);
-  border: 1.5px solid #e0d8cc;
-  background: var(--cream);
+  border: 1.5px solid rgba(0, 151, 178, 0.15);
+  background: #fffdf9;
   font-family: 'DM Sans', sans-serif;
   font-size: 15px;
+  color: var(--text);
+  transition: border-color 0.15s, box-shadow 0.15s;
+  outline: none;
 }
 
-.ms-textarea { resize: vertical; }
+.ms-input:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(0, 151, 178, 0.12);
+}
+
+.ms-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
 
 .ms-inline {
   display: grid;
@@ -240,10 +312,12 @@ const web3AccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
   gap: 12px;
 }
 
-.ms-inline-label { margin-bottom: 12px; }
+.ms-inline-label {
+  margin-bottom: 12px;
+}
 
 .ms-actions {
-  margin-top: 12px;
+  margin-top: 16px;
   display: flex;
   justify-content: flex-end;
 }
@@ -252,56 +326,128 @@ const web3AccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
   justify-content: space-between;
 }
 
-.ms-next, .ms-back {
-  background: var(--green-pale);
-  border: 1px solid rgba(0,151,178,0.18);
-  color: var(--green);
-  border-radius: 50px;
-  padding: 12px 18px;
+.ms-next {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--green);
+  border: 2px solid var(--green);
+  color: var(--white);
+  border-radius: 999px;
+  padding: 12px 22px;
   font-weight: 700;
+  font-size: 14px;
   cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 
-.ms-back { background: transparent; }
+.ms-next:hover {
+  background: #007c92;
+  border-color: #007c92;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+.ms-back {
+  font-family: 'DM Sans', sans-serif;
+  background: transparent;
+  border: 2px solid var(--green);
+  color: var(--green);
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.ms-back:hover {
+  background: var(--green-pale);
+  color: #006f84;
+  border-color: #006f84;
+}
 
 /* Step 1: Next matches the width of inputs (mobile + desktop). */
 .ms-step[data-ms-step-index="0"] .ms-next {
   width: 100%;
 }
+
 .ms-step[data-ms-step-index="0"] .ms-actions {
   justify-content: center;
 }
 
 .ms-submit {
-  background: var(--amber);
-  border: 1px solid var(--amber);
+  font-family: 'DM Sans', sans-serif;
+  background: var(--green);
+  border: 2px solid var(--green);
   color: var(--white);
-  border-radius: 50px;
-  padding: 12px 18px;
+  border-radius: 999px;
+  padding: 12px 22px;
   font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.ms-submit:hover {
+  background: #007c92;
+  border-color: #007c92;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
 }
 
 .ms-form-error {
   color: #c0392b;
   font-size: 14px;
+  font-weight: 600;
   margin: 0 0 12px;
   text-align: center;
 }
 
 .ms-thanks-card {
-  background: var(--green-pale);
-  border: 1px solid rgba(0,151,178,0.18);
-  border-radius: var(--radius);
-  padding: 18px 16px;
+  background: linear-gradient(135deg, var(--green-pale) 0%, #ffffff 100%);
+  border: 1px solid rgba(0, 151, 178, 0.15);
+  border-radius: 18px 20px 18px 18px;
+  padding: 22px 18px;
   text-align: center;
+  box-shadow: 0 6px 24px rgba(0, 151, 178, 0.08);
+}
+
+.ms-thanks-card h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--green);
+  margin: 0 0 8px;
+}
+
+.ms-thanks-card p {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.55;
 }
 
 @media (max-width: 700px) {
-  .ms-panel { margin-top: 10vh; padding: 14px 14px 12px; }
-  .ms-inline { grid-template-columns: 1fr; }
-  .ms-actions { justify-content: center; }
-  .ms-actions.ms-between { flex-direction: column; align-items: stretch; gap: 10px; }
+  .ms-panel {
+    margin-top: 8vh;
+    padding: 18px 16px 16px;
+  }
+
+  .ms-inline {
+    grid-template-columns: 1fr;
+  }
+
+  .ms-actions {
+    justify-content: center;
+  }
+
+  .ms-actions.ms-between {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
 }
 </style>
 
@@ -309,7 +455,6 @@ const web3AccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
   const modal = document.getElementById('tour-modal');
   const form = document.getElementById('ms-form');
   const purposeInput = document.getElementById('ms-purpose-input');
-  const purposeText = document.getElementById('ms-purpose');
   const steps = Array.from(modal?.querySelectorAll('.ms-step') ?? []);
   const dots = Array.from(modal?.querySelectorAll('.ms-dot') ?? []);
   const thanks = modal?.querySelector('.ms-thanks');
@@ -350,7 +495,6 @@ const web3AccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
       visit: 'Schedule a Visit to See It in Person',
     };
     purposeInput.value = labels[purpose] ?? purpose;
-    purposeText.textContent = labels[purpose] ?? 'Request';
 
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
@@ -405,6 +549,16 @@ const web3AccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
     formError && (formError.hidden = true);
 
     const fd = new FormData(form);
+    const accessKey = String(fd.get('access_key') ?? '').trim();
+    if (!accessKey) {
+      if (formError) {
+        formError.textContent = 'Form is not configured yet. Please call us while we finish setup.';
+        formError.hidden = false;
+      }
+      if (btn) btn.disabled = false;
+      return;
+    }
+
     try {
       const res = await fetch(form.action, { method: 'POST', body: fd, headers: { Accept: 'application/json' } });
       const json = await res.json();
@@ -412,6 +566,9 @@ const web3AccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
       form.reset();
       steps.forEach((s) => (s.hidden = true));
       thanks && (thanks.hidden = false);
+      if (formError) {
+        formError.textContent = 'Something went wrong. Please try again or call us — we’d love to help.';
+      }
     } catch {
       formError && (formError.hidden = false);
     } finally {

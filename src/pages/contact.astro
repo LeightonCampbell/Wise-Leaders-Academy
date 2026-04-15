@@ -1,7 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const web3AccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
+const web3AccessKey = (
+  import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ||
+  import.meta.env.WEB3FORMS_ACCESS_KEY ||
+  ''
+).trim();
 ---
 <BaseLayout
   title="Schedule a Tour | Wise Leaders Academy | Contact Us"
@@ -16,11 +20,11 @@ const web3AccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section-band section-band--paper">
     <div class="container contact-grid">
 
       <!-- FORM -->
-      <div class="contact-form-wrap">
+      <div class="contact-form-wrap surface-panel">
         <h2>Send Us a Message</h2>
         <!-- Forms use Web3Forms. Set PUBLIC_WEB3FORMS_ACCESS_KEY in `.env` (see `.env.example`). -->
         <form
@@ -103,84 +107,6 @@ const web3AccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
 
 </BaseLayout>
 
-<style>
-.page-hero {
-  background: linear-gradient(135deg, #f0f7f2, var(--cream));
-  padding: 80px 0 64px;
-  text-align: center;
-}
-.page-hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); margin-bottom: 16px; }
-.page-hero-sub { font-size: 1.1rem; color: var(--text-muted); max-width: 500px; margin: 0 auto; }
-
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: 64px;
-  align-items: start;
-}
-
-.contact-form-wrap h2 {
-  font-size: 1.6rem;
-  margin-bottom: 28px;
-}
-
-.form-row { margin-bottom: 0; }
-.form-row.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
-.form-group { margin-bottom: 20px; }
-.form-group label {
-  display: block;
-  font-weight: 600;
-  font-size: 14px;
-  margin-bottom: 6px;
-  color: var(--text);
-}
-.form-group label span { color: var(--green); }
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 12px 16px;
-  border: 1.5px solid #e0d8cc;
-  border-radius: var(--radius-sm);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 15px;
-  color: var(--text);
-  background: var(--cream);
-  transition: border-color 0.15s, box-shadow 0.15s;
-  outline: none;
-  resize: vertical;
-}
-.form-group input:focus,
-.form-group textarea:focus {
-  border-color: var(--green);
-  box-shadow: 0 0 0 3px rgba(0,151,178,0.12);
-}
-
-.contact-details { display: flex; flex-direction: column; gap: 20px; }
-.detail-card {
-  background: var(--white);
-  border-radius: var(--radius);
-  padding: 24px 20px;
-  box-shadow: var(--shadow);
-}
-.detail-icon { font-size: 24px; margin-bottom: 10px; }
-.detail-card h3 { font-size: 1rem; margin-bottom: 8px; }
-.detail-card p, .detail-card address {
-  font-size: 14px;
-  color: var(--text-muted);
-  font-style: normal;
-  line-height: 1.6;
-  margin-bottom: 4px;
-}
-.detail-card a { color: var(--green); }
-.detail-card a:hover { text-decoration: underline; }
-
-@media (max-width: 900px) {
-  .contact-grid { grid-template-columns: 1fr; gap: 40px; }
-  .form-row.two-col { grid-template-columns: 1fr; }
-}
-</style>
-
 <script>
 const form = document.getElementById('contact-form') as HTMLFormElement | null;
 const success = document.getElementById('contact-success');
@@ -191,8 +117,21 @@ form?.addEventListener('submit', async (e) => {
   const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
   btn.disabled = true;
   btn.textContent = 'Sending…';
+  if (error) error.style.display = 'none';
+  if (success) success.style.display = 'none';
 
   const data = new FormData(form);
+  const accessKey = String(data.get('access_key') ?? '').trim();
+  if (!accessKey) {
+    if (error) {
+      error.textContent = 'Form is not configured yet. Please call us while we finish setup.';
+      error.style.display = 'block';
+    }
+    btn.disabled = false;
+    btn.textContent = 'Send Message';
+    return;
+  }
+
   try {
     const res = await fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
     const json = (await res.json()) as { success?: boolean };

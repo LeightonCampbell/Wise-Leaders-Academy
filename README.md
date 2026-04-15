@@ -66,6 +66,10 @@ All public forms POST to [Web3Forms](https://web3forms.com) (`https://api.web3fo
    ```
    PUBLIC_WEB3FORMS_ACCESS_KEY=your_access_key_here
    ```
+   You can also use:
+   ```
+   WEB3FORMS_ACCESS_KEY=your_access_key_here
+   ```
 3. Run `npm run dev` or `npm run build` — Astro injects `PUBLIC_*` variables at **build time**.
 
 **Production:** Add the same variable in your host’s environment (Netlify / Vercel / Cloudflare **Environment variables**), then trigger a new deploy. Without it, the built HTML will have an empty `access_key` and submissions will fail.

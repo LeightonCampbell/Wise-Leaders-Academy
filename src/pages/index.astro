@@ -1,85 +1,152 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const web3AccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
+const web3AccessKey = (
+  import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ||
+  import.meta.env.WEB3FORMS_ACCESS_KEY ||
+  ''
+).trim();
 ---
 <BaseLayout
   title="Daycare in West Adams & Mid-City | Wise Leaders Academy"
   description="Wise Leaders Academy is a safe, licensed, and loving home daycare in West Adams & Mid-City Los Angeles where Little Leaders grow. State License #197495535."
 >
 
-  <!-- ===== HERO ===== -->
-  <section class="hero">
+  <!-- ===== HERO (split layout, light playful frame — nursery-school reference) ===== -->
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="hero-bg" aria-hidden="true">
+      <div class="hero-blob-bg"></div>
+      <svg class="hero-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true">
+        <path
+          fill="var(--green-pale)"
+          fill-opacity="0.65"
+          d="M0,120 C180,40 360,180 540,100 C720,20 900,160 1080,90 C1260,20 1380,100 1440,60 L1440,200 L0,200 Z"
+        />
+      </svg>
+    </div>
+
     <div class="container hero-inner">
-      <div class="hero-badge">
-        <span class="hero-stars" aria-hidden="true">⭐⭐⭐⭐⭐</span>
-        <div class="hero-badge-copy">
-          <span class="hero-badge-line">Rated 5 Stars by Parents</span>
-          <span class="hero-badge-sep" aria-hidden="true"> · </span>
-          <span class="hero-badge-line">State License #197495535</span>
+      <div class="hero-copy">
+        <p class="hero-kicker">Welcome to</p>
+        <h1 id="hero-heading" class="hero-heading">
+          <span class="hero-heading-line">Wise Leaders</span>
+          <span class="hero-heading-line hero-heading-line--accent">Academy</span>
+        </h1>
+        <p class="hero-lead">
+          A safe, licensed, and loving home daycare in <strong>West Adams &amp; Mid-City</strong> where
+          <strong>Little Leaders</strong> grow through play, structure, and heart.
+        </p>
+        <div class="hero-actions">
+          <a href="#still-looking" class="btn hero-btn-more">More info</a>
+          <a href="/contact" class="btn hero-btn-tour" data-modal-purpose="tour">Schedule a tour</a>
         </div>
+        <p class="hero-trust" role="group" aria-label="Parent rating and licensing">
+          <span class="hero-trust-item">
+            <svg class="hero-star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path fill="#f07830" d="M12 2.2l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 15.9 5.8 19.2l1-5.8-4.2-4.1 5.8-.8L12 2.2z"/>
+            </svg>
+            <span>Rated 5 stars by parents</span>
+          </span>
+          <span class="hero-trust-item">
+            <svg class="hero-license-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path
+                fill="none"
+                stroke="var(--green)"
+                stroke-width="1.75"
+                stroke-linejoin="round"
+                d="M12 2.25 4.75 5.4V11c0 4.05 2.65 7.85 7.25 9.45 4.6-1.6 7.25-5.4 7.25-9.45V5.4L12 2.25z"
+              />
+              <path
+                fill="none"
+                stroke="var(--green)"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9.25 12.25 11.2 14.2 15.9 8.9"
+              />
+            </svg>
+            <span>State License #197495535</span>
+          </span>
+        </p>
       </div>
-      <h1 class="fade-up">
-        <span class="hero-title-line1">The Best Start for Your Child</span>
-        <em class="hero-title-line2">in West Adams & Mid-City</em>
-      </h1>
-      <p class="hero-sub fade-up delay-1">A safe, licensed, and loving home daycare where <strong>"Little Leaders"</strong> grow.</p>
-      <div class="hero-btns fade-up delay-2">
-        <a href="/contact" class="btn btn-primary" data-modal-purpose="tour">Schedule a Tour</a>
-        <a href="#still-looking" class="btn btn-outline btn-inquire">Inquire About Tuition</a>
+
+      <div class="hero-visual">
+        <div class="hero-blob">
+          <img
+            src="/brand/homepage-hero.jpg"
+            alt="Children learning and playing at Wise Leaders Academy in Los Angeles"
+            width="640"
+            height="720"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== TRUST PILLARS ===== -->
-  <section class="pillars section-sm">
-    <div class="container pillars-grid">
-      <div class="pillar">
-        <div class="pillar-icon" aria-hidden="true">
-          <svg width="44" height="44" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Safety icon">
-            <path fill="#ff8d4e" d="m86.062 20.332-32.422-14.859c-2.2656-1.0469-5.0156-1.0469-7.2812 0l-32.422 14.859c-2.7656 1.2812-4.5625 4.0625-4.5625 7.1094v10.047c0 47.574 39.859 57.684 40.266 57.777 0.10938 0.03125 0.23438 0.046875 0.35938 0.046875s0.25-0.015625 0.35938-0.046875c0.40625-0.09375 40.266-10.203 40.266-57.777v-10.047c0-3.0469-1.7969-5.8281-4.5625-7.1094zm1.4375 17.156c0 43.184-33.375 53.527-37.5 54.652-4.125-1.125-37.5-11.469-37.5-54.652v-10.047c0-1.8281 1.0781-3.5 2.7344-4.2656l32.438-14.859c0.71875-0.34375 1.5312-0.51562 2.3281-0.51562s1.6094 0.17188 2.3281 0.51562l32.438 14.859c1.6562 0.76562 2.7344 2.4375 2.7344 4.2656z"/>
-            <path fill="#ff8d4e" d="m80.344 28.02-29.688-13.609c-0.42188-0.1875-0.89062-0.1875-1.3125 0l-29.688 13.609c-0.54688 0.26562-0.90625 0.8125-0.90625 1.4219v8.0469c0 34.121 23.516 45.293 30.719 47.918 0.17188 0.0625 0.34375 0.09375 0.53125 0.09375s0.35938-0.03125 0.53125-0.09375c7.2031-2.625 30.719-13.797 30.719-47.918v-8.0469c0-0.60938-0.35938-1.1562-0.90625-1.4219zm-11.406 15.918-18.75 18.75c-0.875 0.875-2.0625 1.375-3.3125 1.375s-2.4375-0.5-3.3125-1.375l-9.375-9.375c-0.89062 0.89062-1.375-2.0625-1.375-3.3125 0-1.2656 0.48438-2.4375 1.375-3.3281 1.7656-1.7656 4.8594-1.7656 6.625 0l6.0625 6.0625 15.438-15.438c1.7656-1.7656 4.8594-1.7656 6.625 0 0.89062 0.89062 1.375 2.0625 1.375 3.3125 0 1.2656-0.48438 2.4375-1.375 3.3281z"/>
-          </svg>
-        </div>
-        <h3>Safety First</h3>
-        <p>Secure facility with strict health protocols. State Licensed (#197495535) + CPR/First Aid certified.</p>
-      </div>
-      <div class="pillar">
+  <!-- ===== TRUST PILLARS (visual language continues from hero) ===== -->
+  <section class="pillars" aria-labelledby="pillars-heading">
+    <div class="pillars-bg" aria-hidden="true"></div>
+    <div class="container pillars-wrap">
+      <h2 id="pillars-heading" class="pillars-heading">
+        <span class="pillars-kicker">Why families choose us</span>
+        <span class="pillars-title">The foundation every child deserves</span>
+      </h2>
+      <div class="pillars-grid">
+        <div class="pillar">
           <div class="pillar-icon" aria-hidden="true">
-            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="44" height="44" role="img" aria-label="Low teacher ratios icon">
+            <svg width="40" height="40" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Safety icon">
+              <path fill="currentColor" d="m86.062 20.332-32.422-14.859c-2.2656-1.0469-5.0156-1.0469-7.2812 0l-32.422 14.859c-2.7656 1.2812-4.5625 4.0625-4.5625 7.1094v10.047c0 47.574 39.859 57.684 40.266 57.777 0.10938 0.03125 0.23438 0.046875 0.35938 0.046875s0.25-0.015625 0.35938-0.046875c0.40625-0.09375 40.266-10.203 40.266-57.777v-10.047c0-3.0469-1.7969-5.8281-4.5625-7.1094zm1.4375 17.156c0 43.184-33.375 53.527-37.5 54.652-4.125-1.125-37.5-11.469-37.5-54.652v-10.047c0-1.8281 1.0781-3.5 2.7344-4.2656l32.438-14.859c0.71875-0.34375 1.5312-0.51562 2.3281-0.51562s1.6094 0.17188 2.3281 0.51562l32.438 14.859c1.6562 0.76562 2.7344 2.4375 2.7344 4.2656z"/>
+              <path fill="currentColor" d="m80.344 28.02-29.688-13.609c-0.42188-0.1875-0.89062-0.1875-1.3125 0l-29.688 13.609c-0.54688 0.26562-0.90625 0.8125-0.90625 1.4219v8.0469c0 34.121 23.516 45.293 30.719 47.918 0.17188 0.0625 0.34375 0.09375 0.53125 0.09375s0.35938-0.03125 0.53125-0.09375c7.2031-2.625 30.719-13.797 30.719-47.918v-8.0469c0-0.60938-0.35938-1.1562-0.90625-1.4219zm-11.406 15.918-18.75 18.75c-0.875 0.875-2.0625 1.375-3.3125 1.375s-2.4375-0.5-3.3125-1.375l-9.375-9.375c-0.89062 0.89062-1.375-2.0625-1.375-3.3125 0-1.2656 0.48438-2.4375 1.375-3.3281 1.7656-1.7656 4.8594-1.7656 6.625 0l6.0625 6.0625 15.438-15.438c1.7656-1.7656 4.8594-1.7656 6.625 0 0.89062 0.89062 1.375 2.0625 1.375 3.3125 0 1.2656-0.48438 2.4375-1.375 3.3281z"/>
+            </svg>
+          </div>
+          <div class="pillar-body">
+            <h3>Safety First</h3>
+            <p>Secure facility with strict health protocols. State Licensed (#197495535) + CPR/First Aid certified.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon" aria-hidden="true">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="40" height="40" role="img" aria-label="Low teacher ratios icon">
               <path
+                fill="currentColor"
                 d="m85.613 43.746c-3.7461-1.6289-7.9922-1.7031-11.793-0.20312 0.35547-4.8594-0.38281-9.7344-2.1562-14.273-2.0312-5.0938-6.1094-9.1094-11.234-11.062-5.1289-1.957-10.844-1.6719-15.754 0.77734-4.9102 2.4492-8.5703 6.8438-10.094 12.117-4.7305-2.7812-10.41-3.457-15.66-1.8594-5.2539 1.5977-9.5938 5.3242-11.973 10.27-2.3789 4.9492-2.5781 10.668-0.54688 15.766 7.6133 19.102 31.934 24.262 36.734 25.102l0.81641-4.6641c-4.3633-0.76172-26.469-5.4219-33.148-22.188v-0.003906c-1.6719-4.1992-1.3477-8.9336 0.88672-12.863 2.2344-3.9297 6.1367-6.6289 10.602-7.3398 4.4648-0.71094 9.0117 0.64844 12.355 3.6914l3.5938 3.2656 0.36328-4.8398-0.003907-0.003906c0.33203-4.5078 2.6992-8.6211 6.4297-11.176 3.7266-2.5547 8.418-3.2773 12.742-1.9609 4.3281 1.3164 7.8203 4.5273 9.4922 8.7266 0.875 2.207 1.4531 4.5195 1.7148 6.8789-1.4414-1.4883-3.1641-2.6758-5.0664-3.4883-3.7773-1.625-8.0469-1.6836-11.863-0.16406-3.8203 1.5234-6.8789 4.5-8.5039 8.2773-6.3047 14.656 4.1562 30.762 6.3164 33.844l4.7188 6.7227 7.6797-10.34c1.8711-2.5195 8.3906-11.91 10.762-23.383l0.003906 0.003906c3.9023-2.9297 9.2852-2.8672 13.117 0.14844 3.8359 3.0195 5.1602 8.2344 3.2344 12.719-5.3086 12.344-21.969 15.391-25.254 15.875l0.69141 4.6875c3.7227-0.55078 22.609-4.0312 28.914-18.691 1.625-3.7773 1.6836-8.0469 0.16016-11.863-1.5234-3.8203-4.5-6.8789-8.2773-8.5039zm-27.148 26.184-3.7695 5.0742-0.95312-1.3555c-1.9062-2.7148-11.156-16.902-5.8438-29.25 1.9609-4.5547 6.7734-7.1797 11.664-6.3633s8.5898 4.8672 8.9648 9.8086c-2.0352 10.707-8.3047 19.723-10.062 22.086z"
-                fill="#ff8d4e"
               />
             </svg>
           </div>
-        <h3>Low Teacher Ratios</h3>
-        <p>Small group sizes (1:5 ratio) ensuring personalized love and attention for every child.</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar-icon" aria-hidden="true">
-          <svg width="44" height="44" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Play-based growth icon">
-            <g fill="#ff8d4e">
-              <path d="m64.121 56.512 7.6797-8.5508c0.82812-0.92188 1.1016-2.1797 0.71094-3.3594-0.39062-1.1797-1.3398-2.0391-2.5586-2.3008l-11.219-2.3711-5.7617-9.9609c-1.2383-2.1484-4.7109-2.1484-5.9609 0l-5.7617 9.9609-11.211 2.3711c-1.2188 0.26172-2.1719 1.1211-2.5586 2.3008-0.37891 1.1914-0.12109 2.4414 0.71875 3.3594l7.6797 8.5508-1.1914 11.441c-0.12891 1.2383 0.39062 2.4102 1.3984 3.1406 0.60156 0.44141 1.3008 0.66016 2.0117 0.66016 0.48047 0 0.94922-0.10156 1.4102-0.30078l10.492-4.6836 10.488 4.6719c1.1406 0.51953 2.4219 0.37891 3.4219-0.35156 1.0117-0.73047 1.5312-1.9102 1.3984-3.1406zm-3.9102-1.2734 1.3086 12.551-11.52-5.1289-11.52 5.1289 1.3086-12.551-8.4297-9.3789 12.32-2.6094 6.3203-10.922 6.3203 10.941 12.32 2.6094z"/>
-              <path d="m48.121 11.879v8.8594c0 1.0391 0.83984 1.8789 1.8789 1.8789s1.8789-0.83984 1.8789-1.8789v-8.8594c0-1.0391-0.83984-1.8789-1.8789-1.8789s-1.8789 0.83984-1.8789 1.8789z"/>
-              <path d="m21.719 21.711c-0.73047 0.73047-0.73047 1.9219 0 2.6602l6.2617 6.2695c0.37109 0.37109 0.85156 0.55078 1.3281 0.55078 0.48047 0 0.96094-0.17969 1.3281-0.55078 0.73047-0.73047 0.73047-1.9219 0-2.6602l-6.2617-6.2695c-0.73438-0.73047-1.9258-0.73047-2.6562 0z"/>
-              <path d="m22.621 50c0-1.0391-0.83984-1.8789-1.8789-1.8789h-8.8594c-1.043 0-1.8828 0.83984-1.8828 1.8789s0.83984 1.8789 1.8789 1.8789h8.8594c1.043 0 1.8828-0.83984 1.8828-1.8789z"/>
-              <path d="m27.98 69.359-6.2617 6.2695c-0.73047 0.73047-0.73047 1.9219 0 2.6602 0.37109 0.37109 0.85156 0.55078 1.3281 0.55078 0.48047 0 0.96094-0.17969 1.3281-0.55078l6.2617-6.2695c0.73047-0.73047 0.73047-1.9219 0-2.6602-0.73828-0.73047-1.918-0.73047-2.6562 0z"/>
-              <path d="m50 77.379c-1.0391 0-1.8789 0.83984-1.8789 1.8789v8.8594c0 1.0391 0.83984 1.8789 1.8789 1.8789s1.8789-0.83984 1.8789-1.8789v-8.8594c0-1.0391-0.83984-1.8789-1.8789-1.8789z"/>
-              <path d="m72.02 69.359c-0.73047-0.73047-1.9219-0.73047-2.6602 0-0.73047 0.73047-0.73047 1.9219 0 2.6602l6.2695 6.2695c0.37109 0.37109 0.85156 0.55078 1.3281 0.55078 0.48047 0 0.96094-0.17969 1.3281-0.55078 0.73047-0.73047 0.73047-1.9219 0-2.6602z"/>
-              <path d="m88.121 48.121h-8.8594c-1.0391 0-1.8789 0.83984-1.8789 1.8789s0.83984 1.8789 1.8789 1.8789h8.8594c1.0391 0 1.8789-0.83984 1.8789-1.8789s-0.83984-1.8789-1.8789-1.8789z"/>
-              <path d="m72.02 30.641 6.2695-6.2695c0.73047-0.73047 0.73047-1.9219 0-2.6602-0.73047-0.73047-1.9219-0.73047-2.6602 0l-6.2695 6.2695c-0.73047 0.73047-0.73047 1.9219 0 2.6602 0.37109 0.37109 0.85156 0.55078 1.3281 0.55078 0.48438 0 0.96094-0.19141 1.332-0.55078z"/>
-            </g>
-          </svg>
+          <div class="pillar-body">
+            <h3>Low Teacher Ratios</h3>
+            <p>Small group sizes (1:5 ratio) ensuring personalized love and attention for every child.</p>
+          </div>
         </div>
-        <h3>Play-Based Growth</h3>
-        <p>A balanced curriculum of structured learning and outdoor play to build confidence and social skills.</p>
+        <div class="pillar">
+          <div class="pillar-icon" aria-hidden="true">
+            <svg width="40" height="40" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Play-based growth icon">
+              <g fill="currentColor">
+                <path d="m64.121 56.512 7.6797-8.5508c0.82812-0.92188 1.1016-2.1797 0.71094-3.3594-0.39062-1.1797-1.3398-2.0391-2.5586-2.3008l-11.219-2.3711-5.7617-9.9609c-1.2383-2.1484-4.7109-2.1484-5.9609 0l-5.7617 9.9609-11.211 2.3711c-1.2188 0.26172-2.1719 1.1211-2.5586 2.3008-0.37891 1.1914-0.12109 2.4414 0.71875 3.3594l7.6797 8.5508-1.1914 11.441c-0.12891 1.2383 0.39062 2.4102 1.3984 3.1406 0.60156 0.44141 1.3008 0.66016 2.0117 0.66016 0.48047 0 0.94922-0.10156 1.4102-0.30078l10.492-4.6836 10.488 4.6719c1.1406 0.51953 2.4219 0.37891 3.4219-0.35156 1.0117-0.73047 1.5312-1.9102 1.3984-3.1406zm-3.9102-1.2734 1.3086 12.551-11.52-5.1289-11.52 5.1289 1.3086-12.551-8.4297-9.3789 12.32-2.6094 6.3203-10.922 6.3203 10.941 12.32 2.6094z"/>
+                <path d="m48.121 11.879v8.8594c0 1.0391 0.83984 1.8789 1.8789 1.8789s1.8789-0.83984 1.8789-1.8789v-8.8594c0-1.0391-0.83984-1.8789-1.8789-1.8789s-1.8789 0.83984-1.8789 1.8789z"/>
+                <path d="m21.719 21.711c-0.73047 0.73047-0.73047 1.9219 0 2.6602l6.2617 6.2695c0.37109 0.37109 0.85156 0.55078 1.3281 0.55078 0.48047 0 0.96094-0.17969 1.3281-0.55078 0.73047-0.73047 0.73047-1.9219 0-2.6602l-6.2617-6.2695c-0.73438-0.73047-1.9258-0.73047-2.6562 0z"/>
+                <path d="m22.621 50c0-1.0391-0.83984-1.8789-1.8789-1.8789h-8.8594c-1.043 0-1.8828 0.83984-1.8828 1.8789s0.83984 1.8789 1.8789 1.8789h8.8594c1.043 0 1.8828-0.83984 1.8828-1.8789z"/>
+                <path d="m27.98 69.359-6.2617 6.2695c-0.73047 0.73047-0.73047 1.9219 0 2.6602 0.37109 0.37109 0.85156 0.55078 1.3281 0.55078 0.48047 0 0.96094-0.17969 1.3281-0.55078l6.2617-6.2695c0.73047-0.73047 0.73047-1.9219 0-2.6602-0.73828-0.73047-1.918-0.73047-2.6562 0z"/>
+                <path d="m50 77.379c-1.0391 0-1.8789 0.83984-1.8789 1.8789v8.8594c0 1.0391 0.83984 1.8789 1.8789 1.8789s1.8789-0.83984 1.8789-1.8789v-8.8594c0-1.0391-0.83984-1.8789-1.8789-1.8789z"/>
+                <path d="m72.02 69.359c-0.73047-0.73047-1.9219-0.73047-2.6602 0-0.73047 0.73047-0.73047 1.9219 0 2.6602l6.2695 6.2695c0.37109 0.37109 0.85156 0.55078 1.3281 0.55078 0.48047 0 0.96094-0.17969 1.3281-0.55078 0.73047-0.73047 0.73047-1.9219 0-2.6602z"/>
+                <path d="m88.121 48.121h-8.8594c-1.0391 0-1.8789 0.83984-1.8789 1.8789s0.83984 1.8789 1.8789 1.8789h8.8594c1.0391 0 1.8789-0.83984 1.8789-1.8789s-0.83984-1.8789-1.8789-1.8789z"/>
+                <path d="m72.02 30.641 6.2695-6.2695c0.73047-0.73047 0.73047-1.9219 0-2.6602-0.73047-0.73047-1.9219-0.73047-2.6602 0l-6.2695 6.2695c-0.73047 0.73047-0.73047 1.9219 0 2.6602 0.37109 0.37109 0.85156 0.55078 1.3281 0.55078 0.48438 0 0.96094-0.19141 1.332-0.55078z"/>
+              </g>
+            </svg>
+          </div>
+          <div class="pillar-body">
+            <h3>Play-Based Growth</h3>
+            <p>A balanced curriculum of structured learning and outdoor play to build confidence and social skills.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ===== WELCOME / ABOUT INTRO ===== -->
-  <section class="welcome section">
+  <section class="welcome section section-band section-band--light">
     <div class="container welcome-inner">
       <div class="welcome-visual" aria-hidden="true">
         <div class="welcome-card welcome-card-1">
@@ -112,7 +179,7 @@ const web3AccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
   </section>
 
   <!-- ===== CURRICULUM ===== -->
-  <section class="curriculum section" style="background:var(--green-pale);">
+  <section class="curriculum section section-band section-band--mint">
     <div class="container">
       <div class="section-header">
         <span class="eyebrow">Daily Life</span>
@@ -158,7 +225,7 @@ const web3AccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
   </section>
 
   <!-- ===== PROGRAMS ===== -->
-  <section class="programs section">
+  <section class="programs section section-band section-band--paper">
     <div class="container">
       <div class="section-header">
         <span class="eyebrow">Programs</span>
@@ -193,19 +260,19 @@ const web3AccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
           </ul>
         </div>
       </div>
-      <div style="text-align:center;margin-top:40px;">
+      <div class="section-actions">
         <a href="/contact" class="btn btn-primary" data-modal-purpose="tour">Schedule a Tour</a>
       </div>
     </div>
   </section>
 
   <!-- ===== TESTIMONIALS ===== -->
-  <section class="testimonials section" style="background: var(--brown);">
+  <section class="testimonials section section-band section-band--deep">
     <div class="container">
-      <div class="section-header" style="color:var(--cream);">
-        <span class="eyebrow testimonials-eyebrow">Families Love Us</span>
-        <h2 class="testimonials-title">Loved by Local Families</h2>
-        <p class="section-intro testimonials-intro">Don't just take our word for it. Here is what parents in West Adams are saying.</p>
+      <div class="section-header">
+        <span class="eyebrow">Families Love Us</span>
+        <h2>Loved by Local Families</h2>
+        <p class="section-intro">Don't just take our word for it. Here is what parents in West Adams are saying.</p>
       </div>
       <div class="reviews-grid">
         <div class="review-card">
@@ -228,13 +295,13 @@ const web3AccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
   </section>
 
   <!-- ===== CTA / TUITION GUIDE ===== -->
-  <section class="cta-section section" id="still-looking">
+  <section class="cta-section section section-band section-band--mint" id="still-looking">
     <div class="container cta-inner">
       <div class="cta-text">
         <h2>Still looking for the perfect care?</h2>
         <p>Download our current <strong>Tuition Rates</strong> + our free guide: <em>"10 Questions Every Parent Should Ask Before Choosing a Daycare."</em></p>
       </div>
-      <div class="cta-form-wrap">
+      <div class="cta-form-wrap surface-panel">
         <form
           id="tuition-form"
           action="https://api.web3forms.com/submit"
@@ -272,433 +339,259 @@ const web3AccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
 </BaseLayout>
 
 <style>
-/* ---- Hero ---- */
+/* ---- Hero (light split: copy + organic image frame + bottom wave) ---- */
 .hero {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(
-      rgba(0,0,0,0.6),
-      rgba(0,0,0,0.6)
-    ),
-    url('/brand/homepage-hero.jpg');
-  background-size: cover;
-  background-position: center;
-  padding: 100px 0 80px;
-  min-height: 600px;
+  background: linear-gradient(165deg, #ffffff 0%, #f5fbfc 42%, var(--green-pale) 100%);
+  padding: clamp(48px, 8vw, 96px) 0 clamp(64px, 10vw, 120px);
+  min-height: min(92vh, 820px);
   display: flex;
   align-items: center;
 }
 
-.hero-title-line1 {
-  display: inline-block;
-  white-space: nowrap;
-  /* Center handled by h1 flex container */
-  margin: 0;
-  line-height: 1.0;
-  color: #ffffff;
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
-.hero-title-line2 {
-  display: block;
-  font-size: 0.75em; /* 25% less than the main title size */
-  white-space: nowrap;
-  /* Center handled by h1 flex container */
-  margin: 0;
-  line-height: 1.0;
-  color: #0097b2 !important;
+.hero-blob-bg {
+  position: absolute;
+  width: min(72vw, 620px);
+  height: min(72vw, 620px);
+  right: -8%;
+  top: 50%;
+  translate: 0 -50%;
+  background: radial-gradient(ellipse at 40% 40%, rgba(215, 244, 249, 0.9) 0%, rgba(255, 255, 255, 0) 70%);
+  border-radius: 58% 42% 48% 52% / 52% 48% 52% 48%;
+  opacity: 0.85;
 }
 
-@media (max-width: 700px) {
-  /* On small screens allow wrapping so the hero doesn't overflow horizontally. */
-  .hero-title-line1, .hero-title-line2 { white-space: normal; }
+.hero-wave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  width: 100%;
+  height: clamp(72px, 12vw, 140px);
 }
 
 .hero-inner {
   position: relative;
-  max-width: 700px;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.95fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+  max-width: 1180px;
   margin: 0 auto;
-  text-align: center;
 }
 
-.hero-stars {
-  font-size: 15px;
-  letter-spacing: 1px;
-  line-height: 1;
+.hero-copy {
+  text-align: left;
+  max-width: 34rem;
 }
 
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--white);
-  border: 1px solid rgba(0,151,178,0.2);
-  border-radius: 50px;
-  padding: 8px 16px;
+.hero-kicker {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
   font-size: 13px;
-  font-weight: 500;
-  color: var(--text-muted);
-  margin: 0 auto 28px;
-  box-shadow: var(--shadow);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin: 0 0 10px;
 }
 
-/* Desktop: stars left, copy inline with middle dot */
-.hero-badge-copy {
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-  line-height: 1.35;
-}
-
-.hero-badge-line,
-.hero-badge-sep {
-  display: inline;
-}
-
-@media (max-width: 700px) {
-  .hero-badge {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 12px 20px 14px;
-    max-width: 100%;
-  }
-
-  .hero-stars {
-    margin-bottom: 4px;
-  }
-
-  .hero-badge-copy {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    text-align: center;
-    max-width: 18rem;
-  }
-
-  .hero-badge-sep {
-    display: none;
-  }
-
-  .hero-badge-line {
-    display: block;
-  }
-}
-
-h1 {
-  font-size: clamp(2.4rem, 6vw, 4rem);
-  color: var(--brown);
-  margin-bottom: 20px;
-  text-align: center;
+.hero-heading {
+  margin: 0 0 18px;
+  padding: 0;
+  font-family: 'Playfair Display', serif;
+  font-weight: 800;
+  font-size: clamp(2.5rem, 5.5vw, 3.75rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--amber);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  line-height: 1.05;
+  align-items: flex-start;
+  text-align: left;
 }
-h1 em {
-  font-style: italic;
-  color: var(--green);
+
+.hero-heading-line {
   display: block;
-  line-height: 1.05;
 }
 
-.hero-sub {
-  font-size: 1.15rem;
-  color: #ffffff;
-  max-width: 480px;
-  margin: 0 auto 36px;
+.hero-heading-line--accent {
+  font-size: 1.08em;
+  color: #f07830;
+  text-shadow: 0 2px 0 rgba(255, 255, 255, 0.5);
 }
 
-/* Equal-width CTAs: same width side-by-side on larger screens, full-width stack on small */
-.hero-btns {
+.hero-lead {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(1rem, 1.9vw, 1.125rem);
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin: 0 0 22px;
+  max-width: 32rem;
+}
+
+.hero-actions {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
   width: 100%;
-  max-width: min(100%, 560px);
-  margin-left: auto;
-  margin-right: auto;
-  align-items: stretch;
+  max-width: 100%;
 }
-.hero-btns .btn {
+
+.hero-actions .btn {
   width: 100%;
+  min-height: 48px;
   justify-content: center;
   text-align: center;
   box-sizing: border-box;
 }
+
+.hero-btn-more {
+  background: var(--green);
+  color: var(--white);
+  border-color: var(--green);
+  padding: 14px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-width: 2px;
+}
+.hero-btn-more:hover {
+  background: #007c92;
+  border-color: #007c92;
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.hero-btn-tour {
+  background: transparent;
+  color: var(--green);
+  border: 2px solid var(--green);
+  padding: 14px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: capitalize;
+}
+.hero-btn-tour:hover {
+  background: var(--green-pale);
+  color: #006f84;
+  border-color: #006f84;
+  transform: translateY(-1px);
+}
+
+.hero-trust {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 14px 22px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #3d4f5c;
+  margin: 20px 0 0;
+}
+
+.hero-trust-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-star,
+.hero-license-icon {
+  display: block;
+  flex-shrink: 0;
+}
+
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-blob {
+  position: relative;
+  width: min(100%, 440px);
+  aspect-ratio: 1 / 1.08;
+  border-radius: 46% 54% 42% 58% / 55% 45% 52% 48%;
+  overflow: hidden;
+  box-shadow:
+    0 24px 60px rgba(0, 151, 178, 0.18),
+    0 0 0 6px rgba(255, 255, 255, 0.85);
+}
+
+.hero-blob::after {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  border-radius: inherit;
+  border: 2px solid rgba(255, 141, 78, 0.35);
+  pointer-events: none;
+}
+
+.hero-blob img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .hero-copy {
+    margin: 0 auto;
+    text-align: center;
+    max-width: 36rem;
+  }
+  .hero-heading {
+    align-items: center;
+    text-align: center;
+  }
+  .hero-trust {
+    justify-content: center;
+  }
+  .hero-actions {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-visual {
+    order: -1;
+  }
+  .hero-blob {
+    width: min(100%, 380px);
+    margin: 0 auto;
+  }
+  .hero-blob-bg {
+    right: 50%;
+    translate: 50% -45%;
+    top: 22%;
+    width: min(120vw, 520px);
+    height: min(120vw, 520px);
+  }
+}
+
 @media (max-width: 520px) {
-  .hero-btns {
+  .hero-actions {
     grid-template-columns: 1fr;
     max-width: 100%;
   }
 }
 
-/* Hero-specific CTA override */
-.btn-inquire {
-  border-color: #ffffff !important;
-  color: #ffffff !important;
-}
-.btn-inquire:hover {
-  background: #ff8d4e !important;
-  border-color: #ff8d4e !important;
-  color: #ffffff !important;
-}
-
-/* ---- Pillars ---- */
-.pillars { border-top: 1px solid rgba(0,151,178,0.1); }
-.pillars-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-}
-
-.pillar {
-  background: var(--white);
-  border-radius: var(--radius);
-  padding: 32px 28px;
-  box-shadow: var(--shadow);
-  transition: transform 0.2s, box-shadow 0.2s;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-.pillar:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-.pillar-icon { font-size: 32px; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; }
-.pillar-icon svg { display: block; }
-.pillar h3 {
-  font-size: 1.1rem;
-  margin-bottom: 8px;
-  color: #2a2828e6;
-}
-.pillar p { font-size: 14px; color: var(--text-muted); }
-
-/* ---- Welcome ---- */
-.welcome-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  align-items: center;
-}
-
-.welcome-text h2 { font-size: 2rem; margin-bottom: 12px; }
-.welcome-sub { font-size: 1.1rem; color: var(--green); margin-bottom: 20px; font-family: 'DM Sans', sans-serif; }
-.welcome-text p { color: var(--text-muted); margin-bottom: 12px; }
-
-.welcome-visual {
-  position: relative;
-  height: 380px;
-}
-.welcome-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-lg);
-}
-
-.welcome-card {
-  position: absolute;
-  background: var(--white);
-  border-radius: var(--radius-sm);
-  padding: 14px 18px;
-  box-shadow: var(--shadow-lg);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  z-index: 2;
-}
-.welcome-card-1 { top: -16px; left: -24px; }
-.welcome-card-2 { bottom: 32px; left: -24px; }
-.welcome-card-3 { top: 40px; right: -20px; }
-.wc-num { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--green); }
-.welcome-card-3 .wc-num { color: var(--green); }
-.wc-label { font-size: 11px; color: var(--text-muted); font-weight: 500; }
-
-/* ---- Section header ---- */
-.section-header { text-align: center; max-width: 600px; margin: 0 auto 48px; }
-.section-header h2 { font-size: 2rem; margin-bottom: 12px; }
-.section-intro { color: var(--text-muted); }
-
-/* ---- Curriculum ---- */
-.curriculum-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
-}
-.curr-card {
-  background: var(--white);
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.curr-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-.curr-card img { width: 100%; height: 200px; object-fit: cover; }
-.curr-body { padding: 24px; }
-.curr-body h3 { font-size: 1.1rem; margin-bottom: 8px; }
-.curr-body p { font-size: 14px; color: var(--text-muted); }
-
-/* ---- Programs ---- */
-.programs-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 28px;
-  max-width: 860px;
-  margin: 0 auto;
-}
-
-.program-card {
-  background: var(--white);
-  border: 2px solid var(--green-pale);
-  border-radius: var(--radius);
-  padding: 36px 32px;
-  position: relative;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.program-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-.program-card-featured { border-color: var(--amber); }
-
-.program-badge {
-  display: inline-block;
-  background: var(--green-pale);
-  color: var(--green);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  padding: 4px 12px;
-  border-radius: 50px;
-  margin-bottom: 16px;
-}
-.program-badge-amber { background: var(--amber-light); color: #92670d; }
-
-.program-card h3 { font-size: 1.4rem; margin-bottom: 12px; }
-.program-card > p { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
-
-.highlights-list {
-  list-style: none;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-}
-.highlights-list li {
-  font-size: 13px;
-  color: var(--text-muted);
-  padding-left: 20px;
-  position: relative;
-}
-.highlights-list li::before {
-  content: '✓';
-  position: absolute;
-  left: 0;
-  color: var(--green);
-  font-weight: 700;
-}
-
-/* ---- Reviews ---- */
-.reviews-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-.testimonials-eyebrow {
-  background: #ffffff !important;
-  color: #ff8d4e !important;
-}
-.testimonials-intro {
-  color: #ffffff !important;
-}
-
-.testimonials-title {
-  color: #2a2828e6;
-}
-
-.review-card {
-  background: #ffffff;
-  border: 1px solid rgba(255,141,78,0.25);
-  border-radius: var(--radius);
-  padding: 32px 28px;
-}
-.review-card .review-stars {
-  margin-bottom: 16px;
-  font-size: 15px;
-  letter-spacing: 1px;
-  line-height: 1;
-}
-.review-card p {
-  font-size: 15px;
-  color: #727272;
-  line-height: 1.7;
-  margin-bottom: 16px;
-}
-.review-card cite {
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 600;
-  color: #2a2828e6;
-}
-.review-card cite a {
-  color: #2a2828e6;
-}
-.review-card cite a:hover {
-  color: var(--green);
-}
-
-/* ---- CTA / Form ---- */
-.cta-section { background: var(--green-pale); }
-.cta-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  align-items: center;
-}
-.cta-text h2 { font-size: 1.9rem; margin-bottom: 16px; }
-.cta-text p { color: var(--text-muted); }
-
-.cta-form-wrap {
-  background: var(--white);
-  border-radius: var(--radius);
-  padding: 36px;
-  box-shadow: var(--shadow-lg);
-}
-
-.form-group { margin-bottom: 16px; }
-.form-group label {
-  display: block;
-  font-weight: 600;
-  font-size: 14px;
-  margin-bottom: 6px;
-  color: var(--text);
-}
-.form-group input, .form-group textarea {
-  width: 100%;
-  padding: 12px 16px;
-  border: 1.5px solid #e0d8cc;
-  border-radius: var(--radius-sm);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 15px;
-  color: var(--text);
-  background: var(--cream);
-  transition: border-color 0.15s, box-shadow 0.15s;
-  outline: none;
-}
-.form-group input:focus {
-  border-color: var(--green);
-  box-shadow: 0 0 0 3px rgba(0,151,178,0.12);
-}
-
-/* ---- Responsive ---- */
-@media (max-width: 900px) {
-  .pillars-grid, .curriculum-grid, .reviews-grid { grid-template-columns: 1fr; }
-  .welcome-inner, .cta-inner { grid-template-columns: 1fr; gap: 40px; }
-  .welcome-visual { height: 260px; }
-  .programs-grid { grid-template-columns: 1fr; }
-  .welcome-card-1, .welcome-card-2, .welcome-card-3 { display: none; }
-}
 </style>
 
 <script>
@@ -711,6 +604,15 @@ form?.addEventListener('submit', async (e) => {
   if (error) error.style.display = 'none';
   if (success) success.style.display = 'none';
   const data = new FormData(form);
+  const accessKey = String(data.get('access_key') ?? '').trim();
+  if (!accessKey) {
+    if (error) {
+      error.textContent = 'Form is not configured yet. Please call us while we finish setup.';
+      error.style.display = 'block';
+    }
+    return;
+  }
+
   try {
     const res = await fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
     const json = (await res.json()) as { success?: boolean };
