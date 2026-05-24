@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.wiseleadersacademy.com/sitemap-index.xml

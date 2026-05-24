@@ -1,0 +1,27 @@
+# Wise Leaders Academy
+
+> Licensed home daycare in West Adams and Mid-City, Los Angeles, serving children ages 1–6. State License #197495535. Programs emphasize safety, low teacher ratios, and play-based learning.
+
+Wise Leaders Academy helps families find nurturing, education-focused childcare in Los Angeles. Use the links below for enrollment, tours, tuition information, and parent resources.
+
+## Main pages
+
+- [Home](https://www.wiseleadersacademy.com/): Programs, curriculum highlights, parent testimonials, and tuition guide request
+- [About](https://www.wiseleadersacademy.com/about/): Mission, philosophy, curriculum pillars, and teacher ratios
+- [Gallery](https://www.wiseleadersacademy.com/gallery/): Photos of daily life and learning environments
+- [Contact](https://www.wiseleadersacademy.com/contact/): Schedule a tour, ask about enrollment, or send a message
+
+## Resources
+
+- [Daycare costs in Los Angeles (2025)](https://www.wiseleadersacademy.com/understanding-daycare-costs-in-los-angeles-2025/): Guide to average rates and what affects pricing
+
+## Contact
+
+- Website: https://www.wiseleadersacademy.com/
+- Contact page: https://www.wiseleadersacademy.com/contact/
+- Location: West Adams and Mid-City, Los Angeles, CA
+
+## Optional
+
+- [Sitemap](https://www.wiseleadersacademy.com/sitemap-index.xml): Machine-readable list of indexable pages
+- [Robots](https://www.wiseleadersacademy.com/robots.txt): Crawler directives for search engines
